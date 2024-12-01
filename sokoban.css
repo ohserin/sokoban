@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Frijole&family=Honk&family=Modak&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    transform: scale(0);
+
+}
+
+.overlay.out {
+    animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal {
+    background-image: url("/assets/modal-bg.jpg");
+    background-size: cover;
+    width: 55%;
+    height: 75%;
+    border: solid 3px white;
+    border-radius: 4px;
+    background-color: white;
+    z-index: 200;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.8s;
+}
+
+#modal.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-btn {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.modal-btn.hidden {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal-btn>div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    letter-spacing: 3px;
+    z-index: 500;
+    font-family: "Bungee Spice", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.6em;
+}
+
+
+.modal-btn>div::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: #0c2aad;
+    transition: 0.5s;
+    transform-origin: bottom;
+    transform: translatey(-100%) rotatex(90deg);
+    border-radius: 4px;
+}
+
+.modal-btn>div:hover::before {
+    transform: translatey(0) rotatex(0deg);
+}
+
+.modal-btn>div::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: #081d7b;
+    transition: 0.5s;
+    transform-origin: top;
+    transform: translatey(0) rotatex(0deg);
+    border-radius: 4px;
+}
+
+.modal-btn>div:hover::after {
+    transform: translatey(100%) rotatex(90deg);
+}
+
+@keyframes unfoldIn {
+    0% {
+        transform: scaleX(0) scaleY(0.005);
+    }
+
+    50% {
+        transform: scaleX(1) scaleY(0.005);
+    }
+
+    100% {
+        transform: scaleY(1) scaleX(1);
+    }
+}
+
+@keyframes unfoldOut {
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scaleX(1) scaleY(0.005);
+    }
+
+    100% {
+        transform: scaleX(0) scaleY(0.005);
+    }
+}
+
+#gameBoard {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+}
+
+.wall {
+    background-image: url(assets/wall.png);
+    background-size: cover;
+}
+
+.goal {
+    background-image: url(assets/goal.png);
+    background-size: cover;
+}
+
+.box {
+    background-image: url(assets/wood.png);
+    background-size: cover;
+}
+
+.player {
+    background-image: url(assets/player.jpg);
+    background-size: cover;
+}
+
+.empty {
+    background-image: url(assets/ground.png);
+    background-size: cover;
+}
+
+.top {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 25px;
+    background-color: rgb(227, 210, 255);
+    position: relative;
+}
+
+.top>div {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transform: translate(0, -50%);
+}
+
+.top .btn:nth-child(1) {
+    background-color: rgb(255, 69, 69);
+    left: 10px;
+}
+
+.top .btn:nth-child(2) {
+    background-color: rgb(255, 255, 105);
+    left: 30px;
+}
+
+.top .btn:nth-child(3) {
+    background-color: rgb(106, 221, 106);
+    left: 50px;
+}
